@@ -125,7 +125,7 @@ struct t_type_of<xemmaix::suisha::t_timer> : t_uninstantiatable<t_holds<xemmaix:
 };
 
 template<>
-struct t_type_of<xemmaix::suisha::t_loop> : t_uninstantiatable<t_bears<xemmaix::suisha::t_loop>>
+struct t_type_of<xemmaix::suisha::t_loop> : t_uninstantiatable<t_holds<xemmaix::suisha::t_loop>>
 {
 	using t_library = xemmaix::suisha::t_library;
 

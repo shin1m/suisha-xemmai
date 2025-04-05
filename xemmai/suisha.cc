@@ -8,11 +8,6 @@ namespace
 
 thread_local t_root v_loop;
 
-t_pvalue f_loop()
-{
-	return static_cast<t_object*>(v_loop);
-}
-
 }
 
 void t_library::f_main(t_library* a_library, const t_pvalue& a_callable)
@@ -65,7 +60,10 @@ std::vector<std::pair<t_root, t_rvalue>> t_library::f_define()
 		(L"Timer"sv, static_cast<t_object*>(v_type_timer))
 		(L"Loop"sv, static_cast<t_object*>(v_type_loop))
 		(L"main"sv, t_static<void(*)(t_library*, const t_pvalue&), f_main>())
-		(L"loop"sv, t_static<t_pvalue(*)(), f_loop>())
+		(L"loop"sv, t_static<t_object*(*)(), []
+		{
+			return static_cast<t_object*>(v_loop);
+		}>())
 	;
 }
 
