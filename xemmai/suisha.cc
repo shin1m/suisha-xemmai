@@ -56,14 +56,14 @@ std::vector<std::pair<t_root, t_rvalue>> t_library::f_define()
 	t_type_of<t_timer>::f_define(this);
 	t_type_of<t_loop>::f_define(this);
 	return t_define(this)
-		(L"Wait"sv, static_cast<t_object*>(v_type_wait))
-		(L"Timer"sv, static_cast<t_object*>(v_type_timer))
-		(L"Loop"sv, static_cast<t_object*>(v_type_loop))
-		(L"main"sv, t_static<void(*)(t_library*, const t_pvalue&), f_main>())
-		(L"loop"sv, t_static<t_object*(*)(), []
-		{
-			return static_cast<t_object*>(v_loop);
-		}>())
+	(L"Wait"sv, static_cast<t_object*>(v_type_wait))
+	(L"Timer"sv, static_cast<t_object*>(v_type_timer))
+	(L"Loop"sv, static_cast<t_object*>(v_type_loop))
+	(L"main"sv, t_static<void(*)(t_library*, const t_pvalue&), f_main>())
+	(L"loop"sv, t_static<t_object*(*)(), []
+	{
+		return static_cast<t_object*>(v_loop);
+	}>())
 	;
 }
 

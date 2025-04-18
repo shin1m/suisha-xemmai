@@ -22,7 +22,7 @@ void t_type_of<xemmaix::suisha::t_timer>::f_define(t_library* a_library)
 {
 	using xemmaix::suisha::t_timer;
 	t_define{a_library}
-		(L"stop"sv, t_member<void(t_timer::*)(), &t_timer::f_stop>())
+	(L"stop"sv, t_member<void(t_timer::*)(), &t_timer::f_stop>())
 	.f_derive<t_timer, t_object>();
 }
 
@@ -31,18 +31,18 @@ void t_type_of<xemmaix::suisha::t_loop>::f_define(t_library* a_library)
 	using namespace suisha;
 	using xemmaix::suisha::t_loop;
 	t_define{a_library}
-		(L"wait"sv)
-		(L"run"sv, t_member<void(t_loop::*)(), &t_loop::f_run>())
-		(L"exit"sv, t_member<void(t_loop::*)(), &t_loop::f_exit>())
-		(L"terminate"sv, t_member<void(t_loop::*)(), &t_loop::f_terminate>())
-		(L"more"sv, t_member<void(t_loop::*)(), &t_loop::f_more>())
-		(L"post"sv, t_member<void(t_loop::*)(const t_pvalue&), &t_loop::f_post>())
-		(L"poll"sv, t_member<void(t_loop::*)(int, bool, bool, const t_pvalue&), &t_loop::f_poll>())
-		(L"unpoll"sv, t_member<void(t_loop::*)(int), &t_loop::f_unpoll>())
-		(L"timer"sv,
-			t_member<t_pvalue(t_loop::*)(t_library*, const t_pvalue&, size_t), &t_loop::f_timer>(),
-			t_member<t_pvalue(t_loop::*)(t_library*, const t_pvalue&, size_t, bool), &t_loop::f_timer>()
-		)
+	(L"wait"sv)
+	(L"run"sv, t_member<void(t_loop::*)(), &t_loop::f_run>())
+	(L"exit"sv, t_member<void(t_loop::*)(), &t_loop::f_exit>())
+	(L"terminate"sv, t_member<void(t_loop::*)(), &t_loop::f_terminate>())
+	(L"more"sv, t_member<void(t_loop::*)(), &t_loop::f_more>())
+	(L"post"sv, t_member<void(t_loop::*)(const t_pvalue&), &t_loop::f_post>())
+	(L"poll"sv, t_member<void(t_loop::*)(int, bool, bool, const t_pvalue&), &t_loop::f_poll>())
+	(L"unpoll"sv, t_member<void(t_loop::*)(int), &t_loop::f_unpoll>())
+	(L"timer"sv,
+		t_member<t_pvalue(t_loop::*)(t_library*, const t_pvalue&, size_t), &t_loop::f_timer>(),
+		t_member<t_pvalue(t_loop::*)(t_library*, const t_pvalue&, size_t, bool), &t_loop::f_timer>()
+	)
 	.f_derive<t_loop, t_object>();
 }
 
