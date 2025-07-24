@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(suisha VERSION 202506)
+project(suisha VERSION 202507)
 find_package(suisha 202408 REQUIRED)
 find_package(DBus1 1.8 REQUIRED)
 find_package(xemmai 202506 REQUIRED)

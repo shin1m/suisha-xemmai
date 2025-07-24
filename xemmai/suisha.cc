@@ -35,7 +35,7 @@ void t_library::f_main(t_library* a_library, const t_pvalue& a_callable)
 		};
 	};
 	try {
-		a_callable(v_loop);
+		a_callable();
 		finalize();
 	} catch (...) {
 		finalize();

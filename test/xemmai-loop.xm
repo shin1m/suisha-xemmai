@@ -12,8 +12,8 @@ array_equals = @(x, y)
 	true
 
 assert(suisha.loop() === null
-suisha.main(@(loop)
-	assert(suisha.loop() === loop
+suisha.main(@
+	assert(suisha.loop() !== null
 assert(suisha.loop() === null
 
 setup = @(loop)
@@ -24,7 +24,8 @@ setup = @(loop)
 		wait(
 	log
 
-suisha.main(@(loop)
+suisha.main(@
+	loop = suisha.loop(
 	log = setup(loop
 	loop.post(@
 		log.push("post"
@@ -33,7 +34,8 @@ suisha.main(@(loop)
 	assert(array_equals(log, [
 		"wait"
 		"post"
-suisha.main(@(loop)
+suisha.main(@
+	loop = suisha.loop(
 	log = setup(loop
 	t = Thread(@
 		loop.post(@
@@ -44,7 +46,8 @@ suisha.main(@(loop)
 	assert(array_equals(log, [
 		"wait"
 		"post"
-suisha.main(@(loop)
+suisha.main(@
+	loop = suisha.loop(
 	log = setup(loop
 	fds = os.pipe(
 	reader = io.Reader(io.File(fds[0], true), "utf-8"
@@ -65,7 +68,8 @@ suisha.main(@(loop)
 	assert(array_equals(log, [
 		"wait"
 		"poll\n"
-suisha.main(@(loop)
+suisha.main(@
+	loop = suisha.loop(
 	log = setup(loop
 	fds = os.pipe(
 	loop.poll(fds[1], false, true, @(readable, writable) if writable
@@ -88,7 +92,8 @@ suisha.main(@(loop)
 	assert(array_equals(log, [
 		"wait"
 		"poll\n"
-suisha.main(@(loop)
+suisha.main(@
+	loop = suisha.loop(
 	log = setup(loop
 	loop.timer(@
 		log.push("timer"
@@ -98,7 +103,8 @@ suisha.main(@(loop)
 	assert(array_equals(log, [
 		"wait"
 		"timer"
-suisha.main(@(loop)
+suisha.main(@
+	loop = suisha.loop(
 	log = setup(loop
 	n = 0
 	loop.timer(@
