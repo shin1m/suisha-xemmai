@@ -45,9 +45,7 @@ void t_library::f_main(t_library* a_library, const t_pvalue& a_callable)
 
 void t_library::f_scan(t_scan a_scan)
 {
-	a_scan(v_type_wait);
-	a_scan(v_type_timer);
-	a_scan(v_type_loop);
+	XEMMAIX__SUISHA__TYPES(XEMMAI__TYPE__SCAN)
 }
 
 std::vector<std::pair<t_root, t_rvalue>> t_library::f_define()
