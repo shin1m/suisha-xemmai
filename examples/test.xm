@@ -26,7 +26,7 @@ suisha.main(@(loop)
 		print("before wait"
 		wait(
 		print("after wait"
-	loop.poll(0, true, false, @(readable, writable) if readable
+	loop.poll(0, suisha.POLLIN, @(events) if (events & suisha.POLLIN) != 0
 		line = read(
 		if line.size() > 0
 			command = line.shift(

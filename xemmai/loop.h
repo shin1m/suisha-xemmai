@@ -74,12 +74,12 @@ struct t_loop : t_sharable
 			callable();
 		});
 	}
-	void f_poll(int a_descriptor, bool a_read, bool a_write, const t_pvalue& a_callable)
+	void f_poll(int a_descriptor, short a_events, const t_pvalue& a_callable)
 	{
 		f_check();
-		v_loop->f_poll(a_descriptor, a_read, a_write, [callable = t_rvalue(a_callable)](bool a_readable, bool a_writable)
+		v_loop->f_poll(a_descriptor, a_events, [callable = t_rvalue(a_callable)](auto a_events)
 		{
-			callable(a_readable, a_writable);
+			callable(a_events);
 		});
 	}
 	void f_unpoll(int a_descriptor)

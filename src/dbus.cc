@@ -9,11 +9,14 @@ namespace dbus
 void t_bridge::f_enable(DBusConnection* a_connection, DBusWatch* a_watch)
 {
 	unsigned int flags = dbus_watch_get_flags(a_watch);
-	f_loop().f_poll(dbus_watch_get_unix_fd(a_watch), (flags & DBUS_WATCH_READABLE) != 0, (flags & DBUS_WATCH_WRITABLE) != 0, [a_connection, a_watch](bool a_readable, bool a_writable)
+	short events = 0;
+	if (flags & DBUS_WATCH_READABLE) events |= POLLIN;
+	if (flags & DBUS_WATCH_WRITABLE) events |= POLLOUT;
+	f_loop().f_poll(dbus_watch_get_unix_fd(a_watch), events, [a_connection, a_watch](auto a_events)
 	{
 		unsigned int flags = 0;
-		if (a_readable) flags |= DBUS_WATCH_READABLE;
-		if (a_writable) flags |= DBUS_WATCH_WRITABLE;
+		if (a_events & POLLIN) flags |= DBUS_WATCH_READABLE;
+		if (a_events & POLLOUT) flags |= DBUS_WATCH_WRITABLE;
 		if (flags == 0) return;
 		while (true) {
 			bool b = dbus_watch_handle(a_watch, flags) != FALSE;

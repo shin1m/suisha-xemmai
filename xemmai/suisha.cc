@@ -62,6 +62,12 @@ std::vector<std::pair<t_root, t_rvalue>> t_library::f_define()
 	{
 		return static_cast<t_object*>(v_loop);
 	}>())
+	(L"POLLIN"sv, POLLIN)
+	(L"POLLPRI"sv, POLLPRI)
+	(L"POLLOUT"sv, POLLOUT)
+	(L"POLLERR"sv, POLLERR)
+	(L"POLLHUP"sv, POLLHUP)
+	(L"POLLNVAL"sv, POLLNVAL)
 	;
 }
 

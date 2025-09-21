@@ -55,7 +55,7 @@ suisha.main(@(loop) dbus.main(@
 			remote.file = io.File(fd, "r+"
 			remote.writer = io.Writer(remote.file, "utf-8"
 			reader = io.Reader(remote.file, "utf-8"
-			loop.poll(fd, true, false, @(readable, writable) if readable
+			loop.poll(fd, suisha.POLLIN, @(events) if (events & suisha.POLLIN) != 0
 				try
 					system.out.write(reader.read_line(
 					system.out.flush(
@@ -96,7 +96,7 @@ suisha.main(@(loop) dbus.main(@
 			if x.get_type() == dbus.MESSAGE_TYPE_ERROR
 				print(x.get(
 				loop.exit(
-	loop.poll(0, true, false, @(readable, writable) if readable
+	loop.poll(0, suisha.POLLIN, @(events) if (events & suisha.POLLIN) != 0
 		line = system.in.read_line(
 		if line == ""
 			loop.exit(

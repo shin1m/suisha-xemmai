@@ -52,7 +52,7 @@ suisha.main(@
 	fds = os.pipe(
 	reader = io.Reader(io.File(fds[0], true), "utf-8"
 	try
-		loop.poll(fds[0], true, false, @(readable, writable) if readable
+		loop.poll(fds[0], suisha.POLLIN, @(events) if (events & suisha.POLLIN) != 0
 			log.push(reader.read_line(
 			loop.exit(
 		t = Thread(@
@@ -72,7 +72,7 @@ suisha.main(@
 	loop = suisha.loop(
 	log = setup(loop
 	fds = os.pipe(
-	loop.poll(fds[1], false, true, @(readable, writable) if writable
+	loop.poll(fds[1], suisha.POLLOUT, @(events) if (events & suisha.POLLOUT) != 0
 		writer = io.Writer(io.File(fds[1], true), "utf-8"
 		try
 			writer.write_line("poll"

@@ -115,9 +115,9 @@ class t_main
 			close(v_fd);
 		}
 		v_fd = a_fd;
-		if (v_fd >= 0) f_loop().f_poll(v_fd, true, false, [this](bool a_readable, bool a_writable)
+		if (v_fd >= 0) f_loop().f_poll(v_fd, POLLIN, [this](auto a_events)
 		{
-			if (a_readable) f_copy(v_fd, 1);
+			if (a_events & POLLIN) f_copy(v_fd, 1);
 		});
 	}
 	void f_release_profile(dbus::t_message& a_message)
@@ -226,9 +226,9 @@ public:
 				)(f_check);
 			});
 		}
-		f_loop().f_poll(0, true, false, [this](bool a_readable, bool a_writable)
+		f_loop().f_poll(0, POLLIN, [this](auto a_events)
 		{
-			if (a_readable) f_copy(0, v_fd);
+			if (a_events & POLLIN) f_copy(0, v_fd);
 		});
 	}
 	~t_main()

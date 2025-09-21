@@ -37,7 +37,7 @@ void t_type_of<xemmaix::suisha::t_loop>::f_define(t_library* a_library)
 	(L"terminate"sv, t_member<void(t_loop::*)(), &t_loop::f_terminate>())
 	(L"more"sv, t_member<void(t_loop::*)(), &t_loop::f_more>())
 	(L"post"sv, t_member<void(t_loop::*)(const t_pvalue&), &t_loop::f_post>())
-	(L"poll"sv, t_member<void(t_loop::*)(int, bool, bool, const t_pvalue&), &t_loop::f_poll>())
+	(L"poll"sv, t_member<void(t_loop::*)(int, short, const t_pvalue&), &t_loop::f_poll>())
 	(L"unpoll"sv, t_member<void(t_loop::*)(int), &t_loop::f_unpoll>())
 	(L"timer"sv,
 		t_member<t_pvalue(t_loop::*)(t_library*, const t_pvalue&, size_t), &t_loop::f_timer>(),
