@@ -8,7 +8,8 @@ read = @
 	text.parse(system.in.read_line(), @(x) x <= 0x20, xs.push
 	xs
 
-suisha.main(@(loop)
+suisha.main(@
+	loop = suisha.loop(
 	timers = [
 	commands = {
 		"quit": @(arguments) loop.exit(

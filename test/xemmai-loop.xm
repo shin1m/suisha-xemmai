@@ -50,21 +50,22 @@ suisha.main(@
 	loop = suisha.loop(
 	log = setup(loop
 	fds = os.pipe(
-	reader = io.Reader(io.File(fds[0], true), "utf-8"
+	file = io.File(fds[0], true
 	try
+		reader = io.Reader(file.read, "utf-8"
 		loop.poll(fds[0], suisha.POLLIN, @(events) if (events & suisha.POLLIN) != 0
 			log.push(reader.read_line(
 			loop.exit(
 		t = Thread(@
-			writer = io.Writer(io.File(fds[1], true), "utf-8"
+			file = io.File(fds[1], true
 			try
-				writer.write_line("poll"
+				io.Writer(file.write, "utf-8").write_line("poll"
 			finally
-				writer.close(
+				file.close(
 		loop.run(
 		t.join(
 	finally
-		reader.close(
+		file.close(
 	assert(array_equals(log, [
 		"wait"
 		"poll\n"
@@ -73,20 +74,20 @@ suisha.main(@
 	log = setup(loop
 	fds = os.pipe(
 	loop.poll(fds[1], suisha.POLLOUT, @(events) if (events & suisha.POLLOUT) != 0
-		writer = io.Writer(io.File(fds[1], true), "utf-8"
+		file = io.File(fds[1], true
 		try
-			writer.write_line("poll"
+			io.Writer(file.write, "utf-8").write_line("poll"
 			loop.exit(
 		finally
 			loop.unpoll(fds[1]
-			writer.close(
+			file.close(
 	log.share(
 	t = Thread(@
-		reader = io.Reader(io.File(fds[0], true), "utf-8"
+		file = io.File(fds[0], true
 		try
-			log.push(reader.read_line(
+			log.push(io.Reader(file.read, "utf-8").read_line(
 		finally
-			reader.close(
+			file.close(
 	loop.run(
 	t.join(
 	assert(array_equals(log, [

@@ -8,7 +8,7 @@ dbusproxy = Module("dbusproxy"
 
 UUID_SPP = "00001101-0000-1000-8000-00805f9b34fb"
 
-suisha.main(@(loop) dbus.main(@
+suisha.main(@ dbus.main(@
 	if system.arguments.size() < 1
 		print("Usage: <this> <device>"
 		return
@@ -42,6 +42,7 @@ suisha.main(@(loop) dbus.main(@
 			catch Null _
 		throw Throwable("Address " + address + " not found."
 	catch String device_path
+	loop = suisha.loop(
 	remote = null
 	remote__ = @(fd)
 		if remote
@@ -53,8 +54,8 @@ suisha.main(@(loop) dbus.main(@
 			:remote = Object(
 			remote.fd = fd
 			remote.file = io.File(fd, "r+"
-			remote.writer = io.Writer(remote.file, "utf-8"
-			reader = io.Reader(remote.file, "utf-8"
+			remote.writer = io.Writer(remote.file.write, "utf-8"
+			reader = io.Reader(remote.file.read, "utf-8"
 			loop.poll(fd, suisha.POLLIN, @(events) if (events & suisha.POLLIN) != 0
 				try
 					system.out.write(reader.read_line(
